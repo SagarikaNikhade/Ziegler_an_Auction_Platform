@@ -1,6 +1,7 @@
-// AircraftModel.js
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+
+import airplaneTextureImage from '../Image/airplaneTexture.jpg';
 
 const AircraftModel = () => {
   const sceneRef = useRef();
@@ -18,9 +19,11 @@ const AircraftModel = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     sceneRef.current.appendChild(renderer.domElement);
 
-    // Create a simple airplane geometry
+    // Create airplane geometry with texture
+    const textureLoader = new THREE.TextureLoader();
+    const airplaneTexture = textureLoader.load(airplaneTextureImage); // Use a different name here
     const geometry = new THREE.BoxGeometry(1, 0.2, 4);
-    const material = new THREE.MeshPhongMaterial({ color: 0x2194ce });
+    const material = new THREE.MeshPhongMaterial({ map: airplaneTexture });
     const airplane = new THREE.Mesh(geometry, material);
     scene.add(airplane);
 
